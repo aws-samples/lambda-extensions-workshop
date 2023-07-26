@@ -18,7 +18,8 @@ exports.handler = async (event) => {
             },
             ExpressionAttributeValues: {
                 ':pkValue': {S: apiPath}
-            }
+            },
+            ScanIndexForward: false // Sort descending
         };
 
         const command = new QueryCommand(input);
