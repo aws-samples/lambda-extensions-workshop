@@ -4,8 +4,7 @@ const THROW_ERRORS = process.env.THROW_ERRORS || false;
 
 console.log(`Throw error is ${(THROW_ERRORS) ? 'enabled':'disabled'}`)
 
-export const handler = async (event) => {
-
+exports.handler = async (event) => {
     if(THROW_ERRORS) {
         throwError();
     }
