@@ -1,5 +1,5 @@
 {
-  "app": "node bin/partner_environment.js",
+  "app": "node bin/app.js",
   "watch": {
     "include": [
       "**"

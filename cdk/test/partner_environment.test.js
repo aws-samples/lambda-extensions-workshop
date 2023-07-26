@@ -3,7 +3,7 @@
 // const PartnerEnvironment = require('../lib/partner_environment-stack');
 
 // example test. To run these tests, uncomment this file along with the
-// example resource in lib/partner_environment-stack.js
+// example resource in lib/partner-stack.js
 test('SQS Queue Created', () => {
 //   const app = new cdk.App();
 //   // WHEN

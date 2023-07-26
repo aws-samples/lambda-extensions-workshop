@@ -1,36 +1,38 @@
-const { DynamoDB } = require('aws-sdk');
+const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
+const ddbUtil = require("@aws-sdk/util-dynamodb");
+
+const client = new DynamoDBClient();
+
 exports.handler = async (event) => {
     try {
         // Parse the incoming request body
         const requestBody = JSON.parse(event.body);
-        // Create an instance of the DynamoDB DocumentClient
-        const dynamoDB = new DynamoDB.DocumentClient();
+
         // Prepare the item to be stored in DynamoDB
         const item = {
-            function: requestBody.function,
-            'type_timestamp': `${requestBody.type}#${requestBody.timestamp}`,
+            type:  requestBody.type,
+            function_timestamp: `${requestBody.function}#${requestBody.timestamp}`,
             memory: requestBody.memory,
             duration: requestBody.duration,
             init: requestBody.init,
             message: requestBody.message
         };
+
         // Set up the DynamoDB put operation parameters
-        const params = {
+        const input = {
             TableName: process.env.TABLE_NAME,
-            Item: item
+            Item: ddbUtil.marshall(item, {removeUndefinedValues: true})
         };
-        // Store the item in DynamoDB
-        await dynamoDB.put(params).promise();
+        const command = new PutItemCommand(input);
+        const response = await client.send(command);
+
         // Return a success response
         return {
             statusCode: 200,
             body: JSON.stringify({ message: 'Data stored successfully' })
         };
     } catch (error) {
-        // Return an error response if anything goes wrong
-       /* return {
-            statusCode: 500,
-            body: JSON.stringify({ message: 'An error occurred', error })
-        };*/throw error;
+        console.log(error);
+        throw error;
     }
 };
