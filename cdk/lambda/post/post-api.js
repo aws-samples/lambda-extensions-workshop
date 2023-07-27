@@ -5,17 +5,19 @@ const client = new DynamoDBClient();
 
 exports.handler = async (event) => {
     try {
+        const type = event.resource.split('/').pop();
+
         // Parse the incoming request body
-        const requestBody = JSON.parse(event.body);
+        const body = JSON.parse(event.body);
 
         // Prepare the item to be stored in DynamoDB
         const item = {
-            type:  requestBody.type,
-            function_timestamp: `${requestBody.function}#${requestBody.timestamp}`,
-            memory: requestBody.memory,
-            duration: requestBody.duration,
-            init: requestBody.init,
-            message: requestBody.message
+            type:  type,
+            function_timestamp: `${body.function}#${body.timestamp}`,
+            memory: body.memory,
+            duration: body.duration,
+            init: body.init,
+            message: body.message
         };
 
         // Set up the DynamoDB put operation parameters

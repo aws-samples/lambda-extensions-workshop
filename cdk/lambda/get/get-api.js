@@ -6,7 +6,7 @@ const client = new DynamoDBClient();
 exports.handler = async (event) => {
     try {
         // it should be metric or log
-        const apiPath = event.resource.split('/').pop();
+        const type = event.resource.split('/').pop();
 
         // Prepare the item to be stored in DynamoDB
         // get the items from dynamodb where the sortkey starts with the apipath
@@ -17,7 +17,7 @@ exports.handler = async (event) => {
                 '#pkName': 'type'
             },
             ExpressionAttributeValues: {
-                ':pkValue': {S: apiPath}
+                ':pkValue': {S: type}
             },
             ScanIndexForward: false // Sort descending
         };
