@@ -61,14 +61,25 @@ class PartnerConstruct extends Construct {
         }];
 
 
-        // Create a resource and associate the integration with a POST method
-        const resource = api.root.addResource('metric');
-        resource.addMethod('POST', new LambdaIntegration(postAPI), {
+        // Create a resource and add a method to it
+        const metric = api.root.addResource('metric');
+        metric.addMethod('POST', new LambdaIntegration(postAPI), {
             //apiKeyRequired: true
             methodResponses: methodResponses
         });
 
-        resource.addMethod('GET', new LambdaIntegration(getAPI), {
+        metric.addMethod('GET', new LambdaIntegration(getAPI), {
+            apiKeyRequired: false,
+            methodResponses: methodResponses
+        });
+
+        const log = api.root.addResource('log');
+        log.addMethod('POST', new LambdaIntegration(postAPI), {
+            //apiKeyRequired: true
+            methodResponses: methodResponses
+        });
+
+        log.addMethod('GET', new LambdaIntegration(getAPI), {
             apiKeyRequired: false,
             methodResponses: methodResponses
         });
