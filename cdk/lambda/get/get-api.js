@@ -3,6 +3,8 @@ const ddbUtil = require("@aws-sdk/util-dynamodb");
 
 const client = new DynamoDBClient();
 
+const ITEMS_LIMIT = 20;
+
 exports.handler = async (event) => {
     try {
         // it should be metric or log
@@ -13,6 +15,7 @@ exports.handler = async (event) => {
         const input = {
             TableName: process.env.TABLE_NAME,
             KeyConditionExpression: '#pkName = :pkValue',
+            Limit: ITEMS_LIMIT,
             ExpressionAttributeNames: {
                 '#pkName': 'type'
             },
@@ -35,7 +38,7 @@ exports.handler = async (event) => {
             return data;
         });
 
-        return { body: JSON.stringify(items) };
+        return {body: JSON.stringify(items)};
     } catch (error) {
         console.log(error);
         throw error;
