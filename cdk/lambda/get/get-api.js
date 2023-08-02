@@ -35,6 +35,7 @@ exports.handler = async (event) => {
             data.functionName = function_timestamp[0];
             data.timestamp = function_timestamp[1];
             delete data.function_timestamp;
+            delete data.type;
 
             return data;
         });
@@ -47,10 +48,13 @@ exports.handler = async (event) => {
 };
 
 function response(statusCode, message) {
-    const key = (statusCode === 200) ? 'message':'error';
+    const body = (statusCode === 200) ? message : {error:message};
 
     return {
         statusCode: statusCode,
-        body: JSON.stringify({[key]:message})
+        body: JSON.stringify(body),
+        headers: {
+            'Access-Control-Allow-Origin':'*'
+        }
     }
 }

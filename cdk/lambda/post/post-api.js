@@ -40,7 +40,7 @@ exports.handler = async (event) => {
         await client.send(command);
 
         // Return a success response
-        return response(200, 'Data stored successfully');
+        return response(200, {message:'Data stored successfully'});
 
     } catch (error) {
         console.log(error);
@@ -49,10 +49,13 @@ exports.handler = async (event) => {
 };
 
 function response(statusCode, message) {
-    const key = (statusCode === 200) ? 'message':'error';
+    const body = (statusCode === 200) ? message : {error:message};
 
     return {
         statusCode: statusCode,
-        body: JSON.stringify({[key]:message})
+        body: JSON.stringify(body),
+        headers: {
+            'Access-Control-Allow-Origin':'*'
+        }
     }
 }
