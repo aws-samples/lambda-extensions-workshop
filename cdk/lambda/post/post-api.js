@@ -25,6 +25,7 @@ exports.handler = async (event) => {
         const item = {
             type:  type,
             function_timestamp: `${body.functionName}#${body.timestamp}`,
+            clientSecret: body.clientSecret,
             memory: body.memory,
             duration: body.duration,
             init: body.init,
