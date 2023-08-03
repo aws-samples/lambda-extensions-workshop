@@ -7,7 +7,6 @@ exports.handler =  async (event) => {
     const decodedPayload = Buffer.from(headers, 'base64').toString('utf-8');
     const [ clientId, clientSecret ] = decodedPayload.split(":");
 
-    console.log("clientId"+clientId+"_");
     const params = {
         TableName: process.env.TABLE_NAME,
         Key: {
