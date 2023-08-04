@@ -23,8 +23,9 @@ exports.handler = async (event) => {
 
         // Prepare the item to be stored in DynamoDB
         const item = {
-            type:  type,
-            function_timestamp: `${body.functionName}#${body.timestamp}`,
+            pk:  type,
+            sk: `${body.functionName}#${body.timestamp}`,
+            clientSecret: body.clientSecret,
             memory: body.memory,
             duration: body.duration,
             init: body.init,
@@ -59,3 +60,4 @@ function response(statusCode, message) {
         }
     }
 }
+

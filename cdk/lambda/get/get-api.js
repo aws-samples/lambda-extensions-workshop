@@ -17,7 +17,7 @@ exports.handler = async (event) => {
             KeyConditionExpression: '#pkName = :pkValue',
             Limit: ITEMS_LIMIT,
             ExpressionAttributeNames: {
-                '#pkName': 'type'
+                '#pkName': 'pk'
             },
             ExpressionAttributeValues: {
                 ':pkValue': {S: type}
@@ -30,14 +30,28 @@ exports.handler = async (event) => {
 
         // parse items from ddb format to the api format
         const items = query.Items.map((item) => {
-            let data = ddbUtil.unmarshall(item);
-            const function_timestamp = data.function_timestamp.split('#');
-            data.functionName = function_timestamp[0];
-            data.timestamp = function_timestamp[1];
-            delete data.function_timestamp;
-            delete data.type;
+            const data = ddbUtil.unmarshall(item);
+            const [functionName, timeStamp] = data.sk.split('#');
 
-            return data;
+            let result = {
+                functionName: functionName,
+                timeStamp: timeStamp
+            };
+
+            switch (data.pk) {
+                case 'metric':
+                    result.memory = data.memory;
+                    result.duration = data.duration;
+                    result.init = data.init;
+                    break;
+                case 'log':
+                    result.message = data.message;
+                    break;
+                default:
+                    throw new Error('pk not supported');
+            }
+
+            return result;
         });
 
         return response(200, items);
@@ -48,13 +62,13 @@ exports.handler = async (event) => {
 };
 
 function response(statusCode, message) {
-    const body = (statusCode === 200) ? message : {error:message};
+    const body = (statusCode === 200) ? message : {error: message};
 
     return {
         statusCode: statusCode,
         body: JSON.stringify(body),
         headers: {
-            'Access-Control-Allow-Origin':'*'
+            'Access-Control-Allow-Origin': '*'
         }
     }
 }
