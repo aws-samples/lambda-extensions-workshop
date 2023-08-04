@@ -45,7 +45,8 @@ class PartnerConstruct extends Construct {
             code: lambda.Code.fromAsset('lambda/post'),
             handler: 'post-api.handler',
             environment: {
-                TABLE_NAME: table.tableName
+                TABLE_NAME: table.tableName,
+                AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
             }
         });
 
