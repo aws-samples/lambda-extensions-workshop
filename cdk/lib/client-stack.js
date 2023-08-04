@@ -4,7 +4,7 @@ const {ClientConstruct} = require('./client-construct');
 class ClientStack extends Stack {
     constructor(scope, id, props) {
         super(scope, id, props);
-        new ClientConstruct(this, 'ClientConstruct');
+        new ClientConstruct(this, 'ClientConstruct', props);
     }
 }
 

@@ -1,9 +1,13 @@
 const {Construct} = require('constructs');
 const {Table, AttributeType, BillingMode} = require('aws-cdk-lib/aws-dynamodb');
 const {RestApi, LambdaIntegration, Model} = require('aws-cdk-lib/aws-apigateway');
+const cdk = require('aws-cdk-lib');
+const ddbUtil = require("@aws-sdk/util-dynamodb");
 const lambda = require('aws-cdk-lib/aws-lambda');
+const cr = require('aws-cdk-lib/custom-resources');
 
 class PartnerConstruct extends Construct {
+
     constructor(scope, id, props) {
         super(scope, id);
         // Create DynamoDB table
@@ -17,20 +21,39 @@ class PartnerConstruct extends Construct {
         // Create Lambda function
         const postAPI = new lambda.Function(this, 'postAPI', {
             functionName: 'lew-post-api',
-            architecture:  lambda.Architecture.ARM_64,
+            architecture: lambda.Architecture.ARM_64,
             runtime: lambda.Runtime.NODEJS_18_X,
-            code:  lambda.Code.fromAsset('lambda/post'),
+            code: lambda.Code.fromAsset('lambda/post'),
             handler: 'post-api.handler',
             environment: {
                 TABLE_NAME: table.tableName
             }
         });
 
+        const credentials = props.credentials;
+        new cr.AwsCustomResource(this, 'initCredentials', {
+            onCreate: {   // will also be called for a CREATE event
+                service: 'DynamoDB',
+                action: 'putItem',
+                parameters: {
+                    TableName: table.tableName,
+                    Item: ddbUtil.marshall({
+                        type: 'auth',
+                        function_timestamp: credentials.accessKeyId,
+                        secret: credentials.accessKeySecret
+                    }),
+                    ReturnConsumedCapacity: 'TOTAL'
+                },
+                physicalResourceId: 'initialDataDDB'
+            },
+            policy: cr.AwsCustomResourcePolicy.fromSdkCalls({resources: [table.tableArn]})
+        });
+
         const getAPI = new lambda.Function(this, 'getAPI', {
             functionName: 'lew-get-api',
-            architecture:  lambda.Architecture.ARM_64,
+            architecture: lambda.Architecture.ARM_64,
             runtime: lambda.Runtime.NODEJS_18_X,
-            code:  lambda.Code.fromAsset('lambda/get'),
+            code: lambda.Code.fromAsset('lambda/get'),
             handler: 'get-api.handler',
             environment: {
                 TABLE_NAME: table.tableName
@@ -83,7 +106,6 @@ class PartnerConstruct extends Construct {
             apiKeyRequired: false,
             methodResponses: methodResponses
         });
-
     }
 }
 

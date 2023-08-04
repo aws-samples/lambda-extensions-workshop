@@ -4,7 +4,7 @@ const {PartnerConstruct} = require('./partner-construct');
 class PartnerStack extends Stack {
     constructor(scope, id, props) {
         super(scope, id, props);
-        new PartnerConstruct(this, 'PartnerEnvironmentConstruct');
+        new PartnerConstruct(this, 'PartnerEnvironmentConstruct', props);
     }
 }
 
