@@ -1,3 +1,6 @@
+## Install dependencies
+sudo yum install -y jq gettext bash-completion
+
 ## Export variables
 export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
 export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
