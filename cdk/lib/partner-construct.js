@@ -75,12 +75,11 @@ class PartnerConstruct extends Construct {
         });
 
         // Create the Lambda Authorizer for API Gateway using the authorization Lambda function
-        const authorizer = new apigateway.RequestAuthorizer(this, 'authorizer', {
-            // restApi: api.restApiId,
-            name: 'Authorizer',
-            handler: AuthFunction,
-            identitySources: [apigateway.IdentitySource.header('Authorization')],
-        });
+        // const authorizer = new apigateway.RequestAuthorizer(this, 'authorizer', {
+        //     name: 'Authorizer',
+        //     handler: AuthFunction,
+        //     identitySources: [apigateway.IdentitySource.header('Authorization')],
+        // });
 
         // Grant the Lambda function read/write permissions to the DynamoDB table
         table.grantReadWriteData(postAPI);
@@ -105,7 +104,7 @@ class PartnerConstruct extends Construct {
         metric.addMethod('POST', new apigateway.LambdaIntegration(postAPI), {
             //apiKeyRequired: true
             methodResponses: methodResponses,
-            authorizer: authorizer
+            //authorizer: authorizer
         });
 
         metric.addMethod('GET', new apigateway.LambdaIntegration(getAPI), {
@@ -117,7 +116,7 @@ class PartnerConstruct extends Construct {
         log.addMethod('POST', new apigateway.LambdaIntegration(postAPI), {
             //apiKeyRequired: true
             methodResponses: methodResponses,
-            authorizer: authorizer
+            //authorizer: authorizer
         });
 
         log.addMethod('GET', new apigateway.LambdaIntegration(getAPI), {
