@@ -4,6 +4,7 @@ const dynamoDBClient = new DynamoDBClient();
 exports.handler = async (event) => {
     try {
         const authorization = event.headers.Authorization
+        console.log(authorization);
         if(authorization) {
             const credentials = decodeAuthorizationHeader(authorization);
             const retrievedSecret = await retrieveClientSecret(credentials.clientId);
@@ -63,5 +64,6 @@ function generatePolicy(principalId, effect, resource) {
         }
     }
 
+    console.log(authResponse.policyDocument.Statement);
     return authResponse;
 }
