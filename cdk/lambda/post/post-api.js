@@ -26,7 +26,7 @@ exports.handler = async (event) => {
             // Prepare the item to be stored in DynamoDB
             const item = {
                 pk:  type,
-                sk: `${bodyItem.functionName}#${bodyItem.timestamp}`,
+                sk: `${bodyItem.timestamp}#${bodyItem.functionName}#${new Date().getTime()}`,
                 clientSecret: bodyItem.clientSecret,
                 memory: bodyItem.memory,
                 duration: bodyItem.duration,
@@ -42,7 +42,7 @@ exports.handler = async (event) => {
             const command = new PutItemCommand(input);
             await client.send(command);
         }
-        
+
         return response(200, {message:'Data stored successfully'});
     } catch (error) {
         console.log(error);

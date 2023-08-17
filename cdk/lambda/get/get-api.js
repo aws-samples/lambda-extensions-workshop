@@ -31,7 +31,7 @@ exports.handler = async (event) => {
         // parse items from ddb format to the api format
         const items = query.Items.map((item) => {
             const data = ddbUtil.unmarshall(item);
-            const [functionName, timeStamp] = data.sk.split('#');
+            const [timeStamp, functionName] = data.sk.split('#');
 
             let result = {
                 functionName: functionName,
