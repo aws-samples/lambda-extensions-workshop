@@ -1,0 +1,101 @@
+.Title {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: baseline;
+  padding: .5em;
+  padding-left: 2em;
+  background-color: #282c34;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  font-size: calc(8px + 1vmin);
+
+}
+
+.Title-Subtitle {
+  color: rgba(255, 255, 255, 0.75);
+  bottom:0;
+  position:absolute;
+  padding-bottom: 1em;
+  margin-top: 2em;
+  font-size: calc(7px + 1vmin);
+
+}
+
+.Logs-Content-Box {
+  color: #282c34;
+  float: left;
+  margin-left: 0em;
+  margin-top: 1px;
+  padding: 0;
+  text-align: center;
+  width: 90.5vw;
+  border: 1px #282c34 solid;
+}
+
+.Content-Box {
+  color: #282c34;
+  float: left;
+  margin-left: 0em;
+  margin-top: 1px;
+  padding: 0;
+  text-align: center;
+  width: 30vw;
+  border: 1px #ffffff solid;
+}
+
+.Content-Row {
+  display: table;
+  align-items: center;
+  justify-content: center;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+table {
+  width: 1250px;
+  height: 120px;
+}
+
+th{
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+td{
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  font-size: calc(10px + 2vmin);
+  color: rgb(47, 44, 44);
+  margin-top: 3vmin;
+}
+

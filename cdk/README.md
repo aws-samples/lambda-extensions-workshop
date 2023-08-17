@@ -1,14 +1,8 @@
-# Welcome to your CDK TypeScript project
+# Welcome to Lambda Extension Workshop
 
-This is a blank project for CDK development with TypeScript.
+To deploy the application run the following command:
+```bash
+cdk deploy --all -c clientId=REPLACE_CLIENT_ID -c clientSecret=REPLACE_CLIENT_SECRET
+```
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
-
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+Note: REPLACE_CLIENT_ID and REPLACE_CLIENT_SECRET are used to create the initial client in DynamoDB

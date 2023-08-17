@@ -1,0 +1,74 @@
+[
+    {
+      "functionName": "test-function-1",
+      "timestamp": "2018-02-13 12:10:02",
+      "mem": 80000,
+      "duration": 823,
+      "init": 12
+    },
+    {
+      "functionName": "test-function-1",
+      "timestamp": "2018-02-13 12:11:02",
+      "mem": 45677,
+      "duration": 345,
+      "init": 15
+
+    },
+    {
+      "functionName": "test-function-1",
+      "timestamp": "2018-02-13 12:12:02",
+      "mem": 78888,
+      "duration": 555,
+      "init": 9
+    },
+    {
+      "functionName": "test-function-1",
+      "timestamp": "2018-02-13 12:13:02",
+      "mem": 90000,
+      "duration": 4555,
+      "init": 1
+    },
+    {
+      "functionName": "test-function-1",
+      "timestamp": "2018-02-13 12:14:02",
+      "mem": 4300,
+      "duration": 234,
+      "init": 16
+    },
+    {
+      "functionName": "test-function-2",
+      "timestamp": "2018-02-13 12:10:02",
+      "mem": 18000,
+      "duration": 923,
+      "init": 12
+    },
+    {
+      "functionName": "test-function-2",
+      "timestamp": "2018-02-13 12:11:02",
+      "mem": 35000,
+      "duration": 345,
+      "init": 15
+
+    },
+    {
+      "functionName": "test-function-2",
+      "timestamp": "2018-02-13 12:12:02",
+      "mem": 6000,
+      "duration": 555,
+      "init": 9
+    },
+    {
+      "functionName": "test-function-2",
+      "timestamp": "2018-02-13 12:13:02",
+      "mem": 90000,
+      "duration": 4555,
+      "init": 1
+    },
+    {
+      "functionName": "test-function-2",
+      "timestamp": "2018-02-13 12:14:02",
+      "mem": 5000,
+      "duration": 234,
+      "init": 16
+    }
+]
