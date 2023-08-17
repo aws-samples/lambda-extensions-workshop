@@ -6,6 +6,7 @@ const cr = require('aws-cdk-lib/custom-resources');
 const fs = require('fs');
 const yaml = require('js-yaml');
 const cdk = require('aws-cdk-lib');
+const { CfnOutput } = require('aws-cdk-lib');
 
 
 class FrontendConstruct extends Construct {
@@ -76,6 +77,12 @@ class FrontendConstruct extends Construct {
             },
             role: customResourceRole
         });
+
+        //output frontend app url for participant to use
+        new CfnOutput(this, 'ObservabilityToolURL', {
+            value: 'https://main.' + cfnApp.attrDefaultDomain, 
+            exportName: 'ObservabilityToolURL',
+            });
     }
 }
 

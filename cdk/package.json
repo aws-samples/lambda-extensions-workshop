@@ -17,7 +17,7 @@
     "@aws-sdk/client-cognito-identity-provider": "^3.379.1",
     "@aws-sdk/client-dynamodb": "^3.377.0",
     "@aws-sdk/util-dynamodb": "^3.377.0",
-    "aws-cdk-lib": "2.85.0",
+    "aws-cdk-lib": "^2.85.0",
     "constructs": "^10.2.63"
   }
 }
