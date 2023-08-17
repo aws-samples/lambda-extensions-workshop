@@ -5,6 +5,7 @@ const ddbUtil = require("@aws-sdk/util-dynamodb");
 const apigateway = require('aws-cdk-lib/aws-apigateway');
 const lambda = require('aws-cdk-lib/aws-lambda');
 const cr = require('aws-cdk-lib/custom-resources');
+const { CfnOutput } = require('aws-cdk-lib');
 
 class PartnerConstruct extends Construct {
 
@@ -122,6 +123,12 @@ class PartnerConstruct extends Construct {
         log.addMethod('GET', new apigateway.LambdaIntegration(getAPI), {
             apiKeyRequired: false,
             methodResponses: methodResponses
+        });
+
+        //output API endpoint for frontend to use
+        new CfnOutput(this, 'APIEndpointURL', {
+            value: api.url, // Replace with the actual resource name property
+            exportName: 'APIEndpointURL',
         });
     }
 }

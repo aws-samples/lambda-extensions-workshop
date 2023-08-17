@@ -2,6 +2,7 @@
 const cdk = require('aws-cdk-lib');
 const {PartnerStack} = require('../lib/partner-stack');
 const {ClientStack} = require("../lib/client-stack");
+const {FrontEndStack} = require("../lib/frontend-stack");
 
 const app = new cdk.App();
 
@@ -22,3 +23,4 @@ const props = {
 
 new PartnerStack(app, 'lew-partner-stack', props);
 new ClientStack(app, 'lew-client-stack', props);
+new FrontEndStack(app, 'lew-frontend-stack',props);
