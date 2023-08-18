@@ -7,7 +7,7 @@ load() {
   local request_amount=$2
   for i in $(seq 1 $request_amount); do
     echo -n "."
-    aws lambda invoke --function-name $function_name /dev/null &> /dev/null &
+    aws lambda invoke --function-name $function_name /dev/null > /dev/null &
     sleep $INTERVAL
   done
   echo " Done!"
