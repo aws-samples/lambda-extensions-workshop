@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INTERVAL=.250
+INTERVAL=1
 
 load() {
   local function_name=$1
