@@ -27,3 +27,6 @@ npm install -g aws-cdk --force
 
 ## go back to the main environment directory
 cd ~/environment
+
+## Suppress Node16 warning
+export JSII_SILENCE_WARNING_DEPRECATED_NODE_VERSION=1 
