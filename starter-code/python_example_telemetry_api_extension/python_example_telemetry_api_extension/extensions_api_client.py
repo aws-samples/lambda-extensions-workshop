@@ -7,7 +7,7 @@ import requests
 import json
 
 
-REGISTRATION_REQUEST_BASE_URL = "???"
+REGISTRATION_REQUEST_BASE_URL = "http://{0}/2020-01-01/extension".format(os.getenv("AWS_LAMBDA_RUNTIME_API"))
 
 def register_extension(extension_name):
     print ("[extension_api_client.register_extension] Registering Extension using {0}".format(REGISTRATION_REQUEST_BASE_URL))
