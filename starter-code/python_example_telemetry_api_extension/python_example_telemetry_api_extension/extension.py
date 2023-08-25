@@ -16,18 +16,21 @@ def main():
 
     extension_name = Path(__file__).parent.name
     print("Extension Main: Registering the extension using extension name: {0}".format(extension_name), flush=True)    
-    #extension_id = register_extension(extension_name)
+    extension_id = register_extension(extension_name)
 
     print("Extension Main: Starting the http listener which will receive data from Telemetry API", flush=True)    
     queue = Queue()
-    #listener_url = start_http_listener(queue)
+    listener_url = start_http_listener(queue)
     
     print("Extension Main: Subscribing the listener to TelemetryAPI", flush=True)    
-    #subscribe_listener(extension_id, listener_url)
+    subscribe_listener(extension_id, listener_url)
     
     while True:
         print("Extension Main: Next", flush=True)    
-        #event_data = next(extension_id)
+        event_data = next(extension_id)
+
+        #OUR CODE GOES HERE
+
 
 if __name__ == "__main__":
     main()

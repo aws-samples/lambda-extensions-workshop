@@ -9,20 +9,21 @@ AWS_LAMBDA_FUNCTION_NAME = os.environ.get('AWS_LAMBDA_FUNCTION_NAME')
 DISPATCH_POST_URI = os.getenv("DISPATCH_POST_URI")
 ENDPOINT_USER = os.getenv("ENDPOINT_USER")
 ENDPOINT_PASSWORD = os.getenv("ENDPOINT_PASSWORD")
-DISPATCH_MIN_BATCH_SIZE = int(os.getenv("DISPATCH_MIN_BATCH_SIZE"))
-
 
 def dispatch_telemetry(queue, force):
-    while ((not queue.empty()) and (force or queue.qsize() >= DISPATCH_MIN_BATCH_SIZE)):
+    while (not queue.empty()):
         print ("[telemetry_dispatcher] Dispatch telemetry data")
         filtered_queue_metrics = []
         filtered_queue_logs = []
         batch = queue.get_nowait()
 
-        #iterate through events in the batch
+       #iterate through events in the batch
         for event in batch:
-            #1. get event types that we are interested in -- 1/ function logs 2/ execution reports 
-           
+            #get event types that we are interested in -- 1/ function logs 2/ execution reports 
+            if event.get('type') == "function":
+                filtered_queue_logs.append(event)
+            elif event.get('type') == "platform.report":
+                filtered_queue_metrics.append(event)
 
         #Transform data to match backend API
         log_data = format_log_data(filtered_queue_logs)
