@@ -15,7 +15,6 @@ class FrontendConstruct extends Construct {
 
         const repo = new codecommit.Repository(this, 'Repository', {
             repositoryName: 'lewRepository',
-            description: 'Some description.', // optional property
             code: codecommit.Code.fromDirectory('partner-frontend'), // required property
         });
 

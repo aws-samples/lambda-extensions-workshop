@@ -10,11 +10,11 @@ frontend:
     preBuild:
       commands:
         - amplify --version
-        - yarn install
+        - npm install
     build:
       commands:
-        - API_URL=${API_URL}
-        - yarn run build
+        - echo "REACT_APP_API_URL=${API_URL}" >> .env.local
+        - npm run build
   artifacts:
     baseDirectory: build
     files:

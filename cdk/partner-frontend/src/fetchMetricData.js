@@ -1,11 +1,14 @@
 import axios from 'axios';
 
 const fetchMetricData = async () => {
-  const apiGatewayURL = process.env.API_URL; // Replace with your API Gateway URL
+  const apiGatewayURL = process.env.REACT_APP_API_URL; 
+
   const endpoint = 'metric';
 
+  const full_url = apiGatewayURL.concat(endpoint);
+  
   try {
-    const response = await axios.get(apiGatewayURL + endpoint);
+    const response = await axios.get(full_url);
     return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
