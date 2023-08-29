@@ -24,6 +24,13 @@ const telemetryDispatcher = require('./telemetry-dispatcher');
     await telemetryApi.subscribe(extensionId, listenerUri);
     console.log('[index:main] Subscription success');
 
+    while (true) {
+        console.log('[index:main] Next');
+
+        //OUR CODE GOES HERE
+        
+    }
+
 })();
 
 function handleShutdown(event) {
