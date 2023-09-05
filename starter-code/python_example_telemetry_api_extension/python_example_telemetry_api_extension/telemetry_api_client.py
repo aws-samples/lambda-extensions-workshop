@@ -7,7 +7,6 @@ import requests
 import json
 
 TELEMETRY_API_URL = "http://{0}/2022-07-01/telemetry".format(os.getenv("AWS_LAMBDA_RUNTIME_API"))
-LAMBDA_EXTENSION_IDENTIFIER_HEADER_KEY = "Lambda-Extension-Identifier"
 
 TIMEOUT_MS = 25; # Maximum time (in milliseconds) that a batch is buffered.
 MAX_BYTES = 256*1024; # Maximum size in bytes that the logs are buffered in memory.

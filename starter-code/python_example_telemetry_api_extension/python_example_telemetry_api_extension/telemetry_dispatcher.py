@@ -32,3 +32,21 @@ def dispatch_telemetry(queue, force):
         #Dispatch data to backend API 
         post_data(log_data,'log')
         post_data(metric_data,'metric')
+
+def post_data(data,endpoint):
+
+    #OUR CODE GOES HERE
+
+    return True
+
+def format_log_data(filtered_queue):
+
+    #OUR CODE GOES HERE
+
+    return True
+
+def format_metric_data(filtered_queue):
+
+    #OUR CODE GOES HERE
+
+    return True
