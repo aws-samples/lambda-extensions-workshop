@@ -126,10 +126,12 @@ class PartnerConstruct extends Construct {
         });
 
         //output API endpoint for frontend to use
-        new CfnOutput(this, 'APIEndpointURL', {
+        new CfnOutput(this, 'ExtensionAPI', {
             value: api.url, // Replace with the actual resource name property
-            exportName: 'APIEndpointURL',
+            exportName: 'ExtensionAPI',
         });
+
+        this.extensionAPI = api.url;
     }
 }
 
