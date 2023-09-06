@@ -11,14 +11,12 @@ function dispatchTelemetry(queue, force) {
         console.log('[telementry_dispatcher] Dispatch telemetry data');
         const filteredQueueMetrics = [];
         const filteredQueueLogs = [];
-        const batch = queue.shift();
+        const event = queue.shift();
 
-        for (const event of batch) {
-            if (event.type === 'function') {
-                filteredQueueLogs.push(event);
-            } else if (event.type === 'platform.report') {
-                filteredQueueMetrics.push(event);
-            }
+        if (event.type === 'function') {
+            filteredQueueLogs.push(event);
+        } else if (event.type === 'platform.report') {
+            filteredQueueMetrics.push(event);
         }
 
         const logData = formatLogData(filteredQueueLogs);

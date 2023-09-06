@@ -8,4 +8,4 @@ OWN_FILENAME="$(basename $0)"
 LAMBDA_EXTENSION_NAME="$OWN_FILENAME" # (external) extension name has to match the filename
 
 echo "[extension:bash] launching ${LAMBDA_EXTENSION_NAME}"
-exec "/opt/${LAMBDA_EXTENSION_NAME}/index.js"
+exec "/opt/${LAMBDA_EXTENSION_NAME}/extension.js"
