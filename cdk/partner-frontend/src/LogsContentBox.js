@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const fetchLogData = async () => {
-  const apiGatewayURL = process.env.API_URL;
+  const apiGatewayURL = process.env.REACT_APP_API_URL; 
   const endpoint = 'log';
 
   try {
