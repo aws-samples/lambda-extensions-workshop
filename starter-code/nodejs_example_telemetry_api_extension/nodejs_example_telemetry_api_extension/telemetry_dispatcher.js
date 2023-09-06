@@ -3,8 +3,6 @@ const fetch = require('node-fetch');
 const AWS_LAMBDA_FUNCTION_NAME = process.env.AWS_LAMBDA_FUNCTION_NAME;
 
 const DISPATCH_POST_URI = process.env.DISPATCH_POST_URI;
-const ENDPOINT_USER = process.env.ENDPOINT_USER;
-const ENDPOINT_PASSWORD = process.env.ENDPOINT_PASSWORD;
 
 function dispatchTelemetry(queue, force) {
     while (queue.length !== 0) {
