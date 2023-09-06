@@ -1,7 +1,9 @@
-const extensionsApi = require('./extensions-api');
-const telemetryApi = require('./telemetry-api');
-const telemetryListener = require('./telemetry-listener');
-const telemetryDispatcher = require('./telemetry-dispatcher');
+#!/usr/bin/env node
+
+const extensionsApi = require('./extensions_api_client');
+const telemetryApi = require('./telemetry_api_client');
+const telemetryListener = require('./telemetry_http_listener');
+const telemetryDispatcher = require('./telemetry_dispatcher');
 
 (async function main() {
     process.on('SIGINT', () => handleShutdown('SIGINT'));
@@ -23,6 +25,13 @@ const telemetryDispatcher = require('./telemetry-dispatcher');
     console.log('[index:main] Subscribing the telemetry listener to Telemetry API');
     await telemetryApi.subscribe(extensionId, listenerUri);
     console.log('[index:main] Subscription success');
+
+    while (true) {
+        console.log('[index:main] Next');
+
+        //OUR CODE GOES HERE
+        
+    }
 
 })();
 
