@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 const cdk = require('aws-cdk-lib');
-const {PartnerStack} = require('../lib/partner-stack');
-const {ClientStack} = require("../lib/client-stack");
+
+const {BackendStack} = require('../lib/backend-stack');
 const {FrontEndStack} = require("../lib/frontend-stack");
+const {ClientStack} = require("../lib/client-stack");
 
 const app = new cdk.App();
 
@@ -21,6 +22,8 @@ const props = {
     }
 }
 
-new PartnerStack(app, 'lew-partner-stack', props);
-new ClientStack(app, 'lew-client-stack', props);
-new FrontEndStack(app, 'lew-frontend-stack',props);
+const backendStack = new BackendStack(app, 'lew-backend-stack', props);
+const frontEndStack = new FrontEndStack(app, 'lew-frontend-stack', props);
+const clientStack = new ClientStack(app, 'lew-client-stack', props);
+
+frontEndStack.addDependency(backendStack); // it depends on api endpoint CfnOutput

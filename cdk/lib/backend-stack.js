@@ -1,10 +1,10 @@
 const {Stack} = require('aws-cdk-lib');
-const {BackendConstruct} = require('./partner-construct');
+const {BackendConstruct} = require('./backend-construct');
 
 class BackendStack extends Stack {
     constructor(scope, id, props) {
         super(scope, id, props);
-        new BackendConstruct(this, 'PartnerEnvironmentConstruct', props);
+        const backendConstruct = new BackendConstruct(this, 'BackendEnvironmentConstruct', props);
     }
 }
 

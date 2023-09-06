@@ -4,7 +4,6 @@ const amplify = require('aws-cdk-lib/aws-amplify');
 const iam = require('aws-cdk-lib/aws-iam');
 const cr = require('aws-cdk-lib/custom-resources');
 const fs = require('fs');
-const yaml = require('js-yaml');
 const cdk = require('aws-cdk-lib');
 const { CfnOutput } = require('aws-cdk-lib');
 
@@ -15,7 +14,6 @@ class FrontendConstruct extends Construct {
 
         const repo = new codecommit.Repository(this, 'Repository', {
             repositoryName: 'lewRepository',
-            description: 'Some description.', // optional property
             code: codecommit.Code.fromDirectory('partner-frontend'), // required property
         });
 
@@ -34,7 +32,7 @@ class FrontendConstruct extends Construct {
             }
         });
 
-        const api_url = cdk.Fn.importValue('APIEndpointURL')
+        const api_url = cdk.Fn.importValue('ExtensionAPI')
 
         const cfnApp = new amplify.CfnApp(this, 'AmplifyApp', {
             name: 'lewApp',
@@ -79,9 +77,9 @@ class FrontendConstruct extends Construct {
         });
 
         //output frontend app url for participant to use
-        new CfnOutput(this, 'ObservabilityToolURL', {
-            value: 'https://main.' + cfnApp.attrDefaultDomain, 
-            exportName: 'ObservabilityToolURL',
+        new CfnOutput(this, 'WebApp', {
+            value: `https://main.${cfnApp.attrDefaultDomain}`,
+            exportName: 'WebApp',
             });
     }
 }
