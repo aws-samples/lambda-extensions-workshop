@@ -5,7 +5,7 @@ import time
 
 MAX_SLEEP = 3 * 1000
 ERROR_RATE = 10
-THROW_ERRORS = os.environ.get('THROW_ERRORS', 'false').lower() == 'true'
+THROW_ERRORS = os.environ.get('THROW_ERRORS') == 'true'
 
 print(f'Throw error is {"enabled" if THROW_ERRORS else "disabled"}')
 

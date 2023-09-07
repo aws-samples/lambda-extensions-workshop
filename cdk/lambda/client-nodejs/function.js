@@ -1,6 +1,6 @@
 const MAX_SLEEP = 3*1000;
 const ERROR_RATE = 10;
-const THROW_ERRORS = process.env.THROW_ERRORS || false;
+const THROW_ERRORS = (process.env.THROW_ERRORS === 'true')
 
 console.log(`Throw error is ${(THROW_ERRORS) ? 'enabled':'disabled'}`)
 
