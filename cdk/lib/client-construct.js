@@ -6,9 +6,9 @@ class ClientConstruct extends Construct {
     constructor(scope, id, props) {
         super(scope, id);
 
-        // nodejs testing functions
-        const function1NodeJS = new lambda.Function(this, 'function1NodeJS', {
-            functionName: 'lew-function1-nodejs',
+        // Lambda function for module #1
+        const function1 = new lambda.Function(this, 'function1NodeJS', {
+            functionName: 'lew-function1',
             code:  lambda.Code.fromAsset('lambda/client-nodejs'),
             runtime: lambda.Runtime.NODEJS_18_X,
             architecture:  lambda.Architecture.ARM_64,
@@ -19,6 +19,7 @@ class ClientConstruct extends Construct {
             }
         });
 
+        // Lambda functions for module #2 in NodeJS
         const function2NodeJS = new lambda.Function(this, 'function2NodeJS', {
             functionName: 'lew-function2-nodejs',
             code:  lambda.Code.fromAsset('lambda/client-nodejs'),
@@ -43,19 +44,7 @@ class ClientConstruct extends Construct {
             }
         });
 
-        // python testing functions
-        const function1Python = new lambda.Function(this, 'function1Python', {
-            functionName: 'lew-function1-python',
-            code:  lambda.Code.fromAsset('lambda/client-python'),
-            runtime: lambda.Runtime.PYTHON_3_11,
-            architecture:  lambda.Architecture.ARM_64,
-            handler: 'function.handler',
-            timeout: cdk.Duration.seconds(10),
-            environment: {
-                THROW_ERRORS: 'false'
-            }
-        });
-
+        // Lambda functions for module #2 in Python
         const function2Python = new lambda.Function(this, 'function2Python', {
             functionName: 'lew-function2-python',
             code:  lambda.Code.fromAsset('lambda/client-python'),
