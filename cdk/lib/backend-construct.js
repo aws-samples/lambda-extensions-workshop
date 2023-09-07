@@ -7,7 +7,7 @@ const lambda = require('aws-cdk-lib/aws-lambda');
 const cr = require('aws-cdk-lib/custom-resources');
 const { CfnOutput } = require('aws-cdk-lib');
 
-class PartnerConstruct extends Construct {
+class BackendConstruct extends Construct {
 
     constructor(scope, id, props) {
         super(scope, id);
@@ -126,11 +126,11 @@ class PartnerConstruct extends Construct {
         });
 
         //output API endpoint for frontend to use
-        new CfnOutput(this, 'APIEndpointURL', {
+        new CfnOutput(this, 'ExtensionAPI', {
             value: api.url, // Replace with the actual resource name property
-            exportName: 'APIEndpointURL',
+            exportName: 'ExtensionAPI',
         });
     }
 }
 
-module.exports = {PartnerConstruct: PartnerConstruct}
+module.exports = {BackendConstruct: BackendConstruct}
