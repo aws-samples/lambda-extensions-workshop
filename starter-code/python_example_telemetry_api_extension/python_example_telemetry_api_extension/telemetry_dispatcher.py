@@ -7,8 +7,6 @@ AWS_LAMBDA_FUNCTION_NAME = os.environ.get('AWS_LAMBDA_FUNCTION_NAME')
 
 #Environment variables used to configure extension function
 DISPATCH_POST_URI = os.getenv("DISPATCH_POST_URI")
-ENDPOINT_USER = os.getenv("ENDPOINT_USER")
-ENDPOINT_PASSWORD = os.getenv("ENDPOINT_PASSWORD")
 
 def dispatch_telemetry(queue, force):
     while (not queue.empty()):
