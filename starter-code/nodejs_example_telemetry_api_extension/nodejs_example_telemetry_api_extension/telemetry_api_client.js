@@ -24,5 +24,5 @@ async function subscribe(extensionId, listenerUri) {
 }
 
 module.exports = {
-    subscribe,
+    subscribe
 };
