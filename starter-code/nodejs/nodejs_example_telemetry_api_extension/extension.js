@@ -31,32 +31,6 @@ const telemetryDispatcher = require('./telemetry_dispatcher');
 
 async function receiveEvents(extensionId) {
     //OUR CODE GOES HERE
-
-    while(true) {
-        console.log('[index:main] Next');
-
-        // This is a blocking action
-        const event = await extensionsApi.next(extensionId);
-
-        switch (event.eventType) {
-            case 'INVOKE':
-                handleInvoke(event);
-                await telemetryDispatcher.dispatchTelemetry(telemetryListener.eventsQueue, false);
-                break;
-            case 'SHUTDOWN':
-                // Wait for 1 sec to receive remaining events
-                await new Promise((resolve, reject) => {
-                    setTimeout(resolve, 2000)
-                });
-
-                // Dispatch queued telemetry prior to handling the shutdown event
-                await telemetryDispatcher.dispatchTelemetry(telemetryListener.eventsQueue, true);
-                handleShutdown(event);
-                break;
-            default:
-                throw new Error('[index:main] unknown event: ' + event);
-        }
-    }
 }
 
 function handleShutdown(event) {
