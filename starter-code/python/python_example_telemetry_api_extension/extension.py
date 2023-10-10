@@ -34,11 +34,8 @@ def main():
     receive_events()
 
 def receive_events(extension_id, queue):
-    while True:
-        print("Extension Main: Next", flush=True)    
-        event_data = next(extension_id)
-
         #OUR CODE GOES HERE
+
 
 if __name__ == "__main__":
     main()
