@@ -57,7 +57,7 @@ export function ChartContentBox(props) {
       datasets.push({
         label: functionNames[index], // Use the index for correct labeling
         data: sortedDataFunction.map((data) => ({
-          x: data.timeStamp, // Use timestamp as it is
+          x: new Date(data.timeStamp), // Use timestamp as it is
           y: data[props.metric_type],
         })),
         backgroundColor: backgroundColor,
@@ -69,7 +69,7 @@ export function ChartContentBox(props) {
     });
 
     // Sort datasets based on the timestamps (to ensure correct order)
-    datasets.sort((a, b) => a.data[0].x.localeCompare(b.data[0].x));
+    // datasets.sort((a, b) => a.data[0].x.localeCompare(b.data[0].x));
 
     // Get labels from the first dataset (if any)
     const labels = datasets.length > 0 ? datasets[0].formattedLabels : [];
@@ -129,7 +129,7 @@ export function ChartContentBox(props) {
   // Function to merge and sort data points based on timestamps
   const mergeSortedData = (data1, data2) => {
     const mergedData = [...data1, ...(data2 || [])]; // Use empty array if data2 is undefined
-    mergedData.sort((a, b) => a.x.localeCompare(b.x));
+    // mergedData.sort((a, b) => a.x.localeCompare(b.x));
     return mergedData;
   };
 
